@@ -1,8 +1,11 @@
 const TronWeb = require('tronweb');
+const TronGrid = require('trongrid');
 
 const tronWeb = new TronWeb({
     fullHost: 'https://nile.trongrid.io/'
 });
+
+const tronGrid = new TronGrid(tronWeb)
 
 const testSingleSignAccount = {
     priv: "AECC2FBC0BF175DDD04BD1BC3B64A13DB98738962A512544C89B50F5DDB7EBBD",
@@ -59,6 +62,7 @@ module.exports = {
     sleep,
     transfer,
     tronWeb,
+    tronGrid,
     testSingleSignAccount,
     testMultiSignAccounts
 }

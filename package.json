@@ -11,7 +11,7 @@
     "tronweb": "^3.2.3"
   },
   "scripts": {
-    "test": "node src/index.js",
+    "get_tx": "node src/analyze.js",
     "create_account": "node src/account.js",
     "tx": "node src/tx.js"
   }
