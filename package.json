@@ -1,0 +1,18 @@
+{
+  "name": "tron-test",
+  "version": "1.0.0",
+  "description": "tron test",
+  "main": "index.js",
+  "repository": "https://github.com/JacobDenver007/tron-test.git",
+  "author": "jacobdenver007 <jacobdenver@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "trongrid": "^1.2.6",
+    "tronweb": "^3.2.3"
+  },
+  "scripts": {
+    "test": "node src/index.js",
+    "create_account": "node src/account.js",
+    "tx": "node src/tx.js"
+  }
+}
