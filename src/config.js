@@ -7,6 +7,10 @@ const tronWeb = new TronWeb({
 
 const tronGrid = new TronGrid(tronWeb)
 
+const trc10TokenID = '1000016' // Token is TRZ
+
+const trc20ContractAddress = "TLBaRhANQoJFTqre9Nf1mjuwNWjCJeYqUL"
+
 const testSingleSignAccount = {
     priv: "AECC2FBC0BF175DDD04BD1BC3B64A13DB98738962A512544C89B50F5DDB7EBBD",
     address: "TS6VejPL8cQy6pA8eDGyusmmhCrXHRdJK6"
@@ -64,6 +68,8 @@ module.exports = {
     tronWeb,
     tronGrid,
     testSingleSignAccount,
-    testMultiSignAccounts
+    testMultiSignAccounts,
+    trc10TokenID,
+    trc20ContractAddress
 }
 
