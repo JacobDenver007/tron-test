@@ -54,6 +54,7 @@ const testMultiSignAccounts = {
 ### 查询交易
 
 - 查看 src/analyze.js，使用了 trongrid 的接口获取指定要查询的地址的历史交易
+- 执行 ``` yarn get_tx ```
 - trongrid 接口 https://cn.developers.tron.network/docs/trongridjs
 
 > note: TRX 和 TRC10 使用 ``` getTransactions ``` 接口，TRC20 使用 ``` getTrc20Transactions ``` 接口
