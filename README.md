@@ -1,48 +1,59 @@
-# tron-test
+### 测试准备
 
-### 工具
+- 使用 nile 测试网 https://nileex.io/
+- 申请一个测试网账号，且在水龙头申请到 TRX，TRC10，TRC20 代币
 
-#### 网页钱包
+### 创建一个多签账户
 
-使用 tronlink 钱包：
-[tronlink](https://chrome.google.com/webstore/detail/tronlink%EF%BC%88%E6%B3%A2%E5%AE%9D%E9%92%B1%E5%8C%85%EF%BC%89/ibnejdfjmmkpcnlpebklmnkoeoihofec?hl=en-US)
-
-#### 环境
-
-nile 测试网
-[nile 测试网信息 & 水龙头](https://nileex.io/)
-
-### tron 多签
-
-详细介绍请参考：
-[TRON协议—多重签名](http://www.btb8.com/trx/1905/46785.html)
-
-总结下来有以下几点重点：
-
-- tron 多签功能允许权限分级，每个权限可以对应多个私钥
-- tron 有三种权限级别，owner，witness，active
-- owner 有所有权限，刚创建的普通地址会默认把地址绑定到 owner，witness 用于出块，active 是自定义权限，最多有 8 个 active
-- owner 或者是拥有 updateAccountPermissions 权限的 active 可以通过执行 updateAccountPermissions 函数来修改所有的权限
-- active 结构
+- 修改 src/config.js 文件以下内容，其中 ``` testSingleSignAccount ``` 填写我们上一步申请到的账号信息，``` testMultiSignAccounts ``` 是我们将要创建的多签账号信息，此处可以自定义
 ```
-    let activePermission = {
-        type: 2,  // active 的 type 从 2 开始，0 是 owner，1 是 witness
-        permission_name: "active0", 
-        threshold: 2, // 阈值
-        operations: '7fff1fc0037e0000000000000000000000000000000000000000000000000000', // 该 active 权限能做的操作，具体生成方法请见 ```TRON协议—多重签名``` 文档
+const testSingleSignAccount = {
+    priv: "AECC2FBC0BF175DDD04BD1BC3B64A13DB98738962A512544C89B50F5DDB7EBBD",
+    address: "TS6VejPL8cQy6pA8eDGyusmmhCrXHRdJK6"
+}
+
+const testMultiSignAccounts = {
+    owner: {
+        type: 0,
+        permission_name: "owner",
+        threshold: 1,
+        keys: [
+            {
+                priv: "BBD1CCF77B314365D0673B4F69C85A9104F3EFCE4E276B4EEF7B20C7F237950E",
+                address: "TX3MGfWT5aGv81vTSdZtr6hbHxhMVh1FFM",
+                weight: 1
+            }
+        ]
+    },
+    active: {
+        type: 2,
+        permission_name: "active0",
+        threshold: 2,
+        operations: '7fff1fc0037e0000000000000000000000000000000000000000000000000000',
         keys: [{
-            address: testAccounts[0].address,
-            weight: 1
+            priv: "CA2B646CFF30E9CE13864F61CEF5F7C40E8720FA8310B00228F61D14EB761061",
+            address: "TNumhZ1mt8k8JvgNbTkV7gryDMpyMvShPo",
+            weight: 1,
         }, {
-            address: testAccounts[1].address,
-            weight: 1
+            priv: "EE782FE170F680D6CAB340ECA5ED2F6E05B0B9809082CF745207E87734211C72",
+            address: "TBLawZpUkz4yKhD8RzKbq4fKVaZDwkg7h1",
+            weight: 1,
         }]
     }
+}
 ```
 
-### tron 交易
+- 执行 ``` yarn create_account ```
+- 创建完毕可以在测试网浏览器查看
 
-tron 通用的有三种火币
-- TRX
-- TRC10 也是原生货币，但是区别于 TRX，统称为 TRC10
-- TRC20 类似 ERC20，是合约货币
+### 发送交易
+
+- 查看 src/tx.js，此文件包含了 6 笔交易，分别是 TRX，TRC10，TRC20 的单签和多签转账
+- 执行 ``` yarn tx ```
+
+### 查询交易
+
+- 查看 src/analyze.js，使用了 trongrid 的接口获取指定要查询的地址的历史交易
+- trongrid 接口 https://cn.developers.tron.network/docs/trongridjs
+
+> note: TRX 和 TRC10 使用 ``` getTransactions ``` 接口，TRC20 使用 ``` getTrc20Transactions ``` 接口
