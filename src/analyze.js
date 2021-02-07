@@ -1,7 +1,7 @@
 const { tronWeb, tronGrid, trc20ContractAddress, testSingleSignAccount, testMultiSignAccounts, transfer } = require('./config')
 
 async function getAccountTxs(address) {
-    let txs = await tronGrid.account.getTransactions(address, { only_to: true, only_confirmed: true, limit: 1 })
+    let txs = await tronGrid.account.getTransactions(address, { only_to: true, only_confirmed: true, limit: 2 })
 
     var ret = new Array();
     for (let i = 0; i < txs.data.length; i++) {
