@@ -13,6 +13,7 @@
   "scripts": {
     "get_tx": "node src/analyze.js",
     "create_account": "node src/account.js",
-    "tx": "node src/tx.js"
+    "tx": "node src/tx.js",
+    "create_trc10": "node src/asset.js"
   }
 }
